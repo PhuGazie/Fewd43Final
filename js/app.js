@@ -12,9 +12,17 @@ function addWeather(target) {
 function getWeather(searchQuery) {
   console.log(searchQuery);
   // var URL = "https://www.metaweather.com/api/location/search/?query=" + searchQuery;
-  var baseURL = "http://api.openweathermap.org/data/2.5/weather?q=";
-  var appid = "9c8ceef1b9aaa6c65334ad7114b85c53";
-  var fullURL = baseURL + searchQuery + "&appid=" + appid
+  var searchZip = parseInt(searchQuery);
+
+  if (searchZip === NaN) {
+    var baseURL = "http://api.openweathermap.org/data/2.5/weather?q=";
+    var appid = "9c8ceef1b9aaa6c65334ad7114b85c53";
+    var fullURL = baseURL + searchQuery + "&appid=" + appid;
+  } else {
+    var baseURL = "http://api.openweathermap.org/data/2.5/weather?zip=";
+    var appid = "9c8ceef1b9aaa6c65334ad7114b85c53";
+    var fullURL = baseURL + searchQuery + "&appid=" + appid;
+  }
   $.ajax({
     url: fullURL,
     success: function(data){
